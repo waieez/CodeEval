@@ -1,3 +1,4 @@
+"use strict";
 //Fizz Buzz
 function fizzBuzz (fizz, buzz, range) {
 	var string = [];
@@ -45,4 +46,43 @@ function isPrime(n) {
 	};
 
 	return true;
+}
+
+//Sum Primes
+function sumPrimes (numPrimes) {
+	var count = numPrimes-1,
+		sum = 2,
+		estimate = estimatePrime(numPrimes),
+		array = createNumbersArray(estimate),
+		i = 3;
+
+	while (count > 0 && i <= estimate){
+		if (array[i] != 0 ) {
+			sum += i;
+			seive(i, array, estimate);
+			count--;
+		}
+		i += 2;
+	}
+	return sum;
+}
+
+
+function estimatePrime (num) {
+	//Rosser's Theorem ~8840 for 1000th prime;
+	return  num * ( Math.log(num) + Math.log(Math.log(num)) );
+}
+
+function createNumbersArray ( estimate ){
+	var numbers = [];
+	for (var i = 3; i <= estimate ; i+=2) {
+		numbers[i] = i;
+	};
+	return numbers;
+}
+
+function seive (number, array, estimate) {
+	for (var i = number * 2; i <= estimate ; i += number) {
+		array[i] = 0;
+	}
 }

@@ -1,4 +1,6 @@
 "use strict";
+
+
 //Fizz Buzz
 function fizzBuzz (fizz, buzz, range) {
 	var string = [];
@@ -86,3 +88,22 @@ function seive (number, array, estimate) {
 		array[i] = 0;
 	}
 }
+
+
+//Mth Last Element
+
+function fromLast (array, index) {
+	if (index <= array.length) return array[ array.length - index ] ;
+}
+
+var arr = ['a','b','c',0,1,2,3];
+
+function assertEqual (f, args, value) {
+	console.log( f.apply(null, args ) === value );
+}
+
+assertEqual( fromLast, [arr, 2], 2);
+assertEqual( fromLast, [arr, 4], 0);
+assertEqual( fromLast, [arr, 7], 'a');
+assertEqual( fromLast, [arr, 5], "c");
+assertEqual( fromLast, [arr, 20], undefined);

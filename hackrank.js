@@ -37,3 +37,44 @@ function stepsToPalindrome (word){
 
     return count;
 }
+
+/* Is Fibo
+*/
+
+//recursive fibo (not used)
+function fibo (n) {
+    if (n == 0) return 0;
+    if (n == 1) return 1;
+
+    return fibo(n-1) + fibo(n-2);
+}
+
+//faster if array of fibs cached. 
+function isFibo(val){
+
+    var arr = [0,1];
+    var cur = 1;
+    var lastFib = arr[cur];
+
+    while (val > lastFib) {
+
+        lastFib = arr[cur] + arr[cur-1];
+
+        arr.push(lastFib);
+
+        if (val === lastFib) return true;
+        
+        cur++
+    }
+
+    return arr.indexOf(val) != -1 ? true: false;
+
+}
+
+function assertEqual (f, args, value) {
+    console.log( f.apply(null, args ) === value );
+}
+
+assertEqual(isFibo, [2] , true);
+assertEqual(isFibo, [4] , false);
+assertEqual(isFibo, [0] , true);

@@ -75,6 +75,42 @@ function assertEqual (f, args, value) {
     console.log( f.apply(null, args ) === value );
 }
 
+/*
 assertEqual(isFibo, [2] , true);
 assertEqual(isFibo, [4] , false);
 assertEqual(isFibo, [0] , true);
+*/
+
+/* Cavity Map
+    change value to "X" only if adjacent values are smaller.
+*/
+
+var map = [ [ '1', '1', '1', '2' ],
+            [ '1', '9', '1', '2' ],
+            [ '1', '8', '9', '2' ],
+            [ '1', '2', '3', '4' ] ];
+
+function cavityMap (map) {
+
+    var size = map.length-1;
+    var cavs = [];
+
+    for (var i = 1; i < size; i++) {
+        for (var j = 1; j < size; j++) {
+            var curr = map[i][j];
+            if ( curr > map[i-1][j] && curr > map[i+1][j] ){
+                if (curr > map[i][j-1] && curr > map[i][j+1]) {
+                    cavs.push([i,j]);
+                }
+            }
+
+        };
+    };
+
+    cavs.forEach(function (cavity){
+        map[cavity[0]][cavity[1]] = 'X';
+    })
+
+    return map;
+}
+

@@ -112,7 +112,8 @@ function cavityMap (map) {
 }
 
 /*Sherlock and Queries
-    Partial Correct.
+    Passes with Ruby version see hackrank.rb
+    Partial Correct in Javascript.
     Need to figure out how to deal with inconsistencies between evaluator and my computer
     Also deal with overflow / large numbers in javascript.
 */

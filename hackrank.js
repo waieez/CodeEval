@@ -1,5 +1,12 @@
 //HackerRank
 
+/* Simple test util;
+*/
+function assertEqual (f, args, value) {
+    console.log( f.apply(null, args ) === value );
+}
+
+
 /* Utopian Tree
     For some reason decided on recursive solution.
     "Spring" *= 2, "Summer" += 1
@@ -71,16 +78,6 @@ function isFibo(val){
 
 }
 
-function assertEqual (f, args, value) {
-    console.log( f.apply(null, args ) === value );
-}
-
-/*
-assertEqual(isFibo, [2] , true);
-assertEqual(isFibo, [4] , false);
-assertEqual(isFibo, [0] , true);
-*/
-
 /* Cavity Map
     change value to "X" only if adjacent values are smaller.
 */
@@ -114,3 +111,42 @@ function cavityMap (map) {
     return map;
 }
 
+/*Sherlock and Queries
+    Partial Correct.
+    Need to figure out how to deal with inconsistencies between evaluator and my computer
+    Also deal with overflow / large numbers in javascript.
+*/
+
+function sherlockQ (rA, rB, rC) {//problem is to reduce this algorithm's time complexity
+
+    for (var i = 0; i < rB.length; i++) {
+        for (var j = 0; j < rA.length; j++) {
+            if ( (j+1) % rB[i] == 0 ) {
+                rA[j] = (rA[j] * rC[i]) % 1000000007;
+            }
+        };
+    };
+    return rA;
+}
+
+function sQ2 (rA, set) { //works alright for smaller. trips up when numbers get large.
+    rA.unshift(0);
+    rLen = rA.length;
+    for(val in set) {
+        var inc = +val;
+        for (var i = inc; i < rLen; i += inc) {
+            rA[i] = (rA[i] * set[val]) % 1000000007;
+        };
+    }
+    rA.shift();
+    return rA;
+}
+
+function createSet(rB, rC){
+    var set = {};
+    for (var i = 0 ; i < rC.length-1 ; i++) { // is i < rC.length in editor
+        var val = rB[i];
+        set[ val ] = set[ val ] == undefined ?  rC[i] : ( set[val] * rC[i] ) % 1000000007 ;
+    };
+    return set;
+}

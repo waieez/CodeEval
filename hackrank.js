@@ -151,3 +151,28 @@ function createSet(rB, rC){
     };
     return set;
 }
+
+/*Closest Numbers
+    formatted and sorted input as arr dsc
+*/
+
+function closeNums (arr){
+
+    var min = arr[0]-arr[1];
+    var diff = min;
+    var pairs = [ arr[0], arr[1] ];
+
+
+    for (var i = 1; i < arr.length; i++) {
+        diff = arr[i] - arr[i+1]
+        if ( diff < min ) {
+            min = diff;
+            pairs = [];
+            pairs.push(arr[i], arr[i+1]);
+        } else if (diff == min) {
+            pairs.push(arr[i], arr[i+1]);
+        }
+    };
+
+    return pairs;
+}

@@ -67,3 +67,36 @@ function merge ( array, p, r ) {
 	}
 	return q;
 }
+
+
+//Counting sort
+function countSort (arr){
+
+	var bin = makeBin(arr),
+		sorted = [],
+		val;
+
+	for (var i = arr.length - 1; i >= 0; i--) {
+		val = arr[i];
+		bin[val]--;
+		sorted[ bin[val] ] = val;
+	};
+
+	return sorted;
+}
+
+function makeBin (arr) {
+	var bin = [],
+		val;
+
+	for (var i = 0; i < arr.length; i++) {
+		val = arr[i];
+		bin[val] = bin[val] ? bin[val] + 1 : 1;
+	}
+
+	for (var i = 1; i < bin.length; i++) {
+		bin[i] = bin[i] + bin[i-1] || bin[i-1];
+	}
+
+	return bin;
+}

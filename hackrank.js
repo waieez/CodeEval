@@ -176,3 +176,35 @@ function closeNums (arr){
 
     return pairs;
 }
+
+/*Sherlock and Pairs
+*/
+
+function UniqPairs (arr) {
+
+    var bin = makeBin(arr);
+
+    pairs = 0;
+    var n;
+
+    for (key in bin){
+        n = bin[key];
+
+        //oh maths.. why you so awesome
+        pairs += ( n * (n-1) ) ;
+    }
+
+    return pairs;
+}
+
+function makeBin (arr) {
+    var bin = {},
+        val;
+
+    for (var i = 0; i < arr.length; i++) {
+        val = arr[i];
+        bin[val] = bin[val] ? bin[val] + 1 : 1;
+    }
+
+    return bin;
+}

@@ -95,7 +95,9 @@ function makeBin (arr) {
 	}
 
 	for (var i = 1; i < bin.length; i++) {
-		bin[i] = bin[i] + bin[i-1] || bin[i-1];
+        if ( bin[i-1] ) {
+            bin[i] = bin[i] ? bin[i] + bin[i-1] : bin[i-1];
+        }
 	}
 
 	return bin;

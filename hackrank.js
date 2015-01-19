@@ -191,7 +191,7 @@ function UniqPairs (arr) {
         n = bin[key];
 
         //oh maths.. why you so awesome
-        pairs += ( n * (n-1) ) ;
+        if (n > 1) pairs += ( n * (n-1) ) ;
     }
 
     return pairs;

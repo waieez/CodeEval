@@ -208,3 +208,54 @@ function makeBin (arr) {
 
     return bin;
 }
+
+
+// You and your K-1 friends want to buy N flowers. 
+// Flower number i has cost ci. 
+// Unfortunately the seller does not want just one customer to buy a lot of flowers, 
+// so he tries to change the price of flowers for customers who have already bought some flowers. 
+// More precisely, if a customer has already bought x flowers, 
+// he should pay (x+1)*ci dollars to buy flower number i. 
+// You and your K-1 friends want to buy all N flowers in such a way that you spend the least amount of money. 
+// You can buy the flowers in any order.
+
+
+function flowers (people, flowers, prices) {
+  // iterate through prices, keeping track of who has the min spent,
+  // person with min spent is next in line to buy
+  // should use a heap for now just sort after each buy?
+  prices.sort(function (a, b) {
+    return b - a;
+  });
+
+  if (prices.length > flowers) {
+    var extra = prices.length - flowers;
+    prices = prices.slice(extra);
+  }
+
+  var customers = [];
+  for (var p = 0; p < people; p++) {
+    customers[p] = [0,0];
+  }
+
+  prices.forEach(function (price) {
+    var paid = customers[0][0];
+    var flowersBought = customers[0][1];
+    var markupPrice = getPrice(flowersBought, price);
+    customers[0][0] = paid + markupPrice;
+    customers[0][1] += 1;
+    console.log(customers[0])
+    customers.sort(function (a, b) {
+      return a[0] - b[0];
+    });
+  });
+
+  return customers.reduce(function (sum, person, indx, arr) {
+    return sum + person[0];
+  }, 0);
+
+}
+
+function getPrice (flowersBought, price) {
+  return (flowersBought + 1) * price;
+}

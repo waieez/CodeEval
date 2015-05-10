@@ -259,3 +259,54 @@ function flowers (people, flowers, prices) {
 function getPrice (flowersBought, price) {
   return (flowersBought + 1) * price;
 }
+
+
+/* Grid Challenge - partially passing
+*/
+
+// extracting inputs was kinda involved for this one.
+function processData(input) {
+    input = getInput(input.split('\n').reverse());
+    input.forEach(function(matrix){
+        console.log(sortGrid(matrix));
+    });
+}
+
+function getInput(array) {
+    var input = [];
+    var numTests = array.pop();
+    for (var i = 0; i < numTests; i++) {
+        var numLines = +array.pop();
+        input[i] = getMatrix(array, numLines);
+    }
+    return input;
+}
+
+function getMatrix (array, numLines) {
+    var matrix = [];
+    for (var i = 0; i < numLines; i++) {
+        matrix.push(array.pop());
+    }
+    return matrix.map(function (row) {
+       return row.split(""); 
+    });
+}
+
+function sortGrid (matrix) {
+  matrix.forEach(function(row) {
+    row.sort(function(a, b) {
+      return a < b;
+    });
+  });
+
+  var result = true;
+  for (var col = 0; col < matrix[0].length; col++) {
+    for (var row = 1; row < matrix.length; row++) {
+      if (matrix[row][col] < matrix[row-1][col]) {
+        result = false;
+        break;
+      }
+    }
+  }
+  return result ? 'YES': 'NO';
+}
